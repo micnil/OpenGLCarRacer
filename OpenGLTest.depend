@@ -1,0 +1,1259 @@
+# depslib dependency file v1.0
+1368563077 source:c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\main.cpp
+	<cmath>
+	<iostream>
+	<string>
+	<vector>
+	<windows.h>
+	<mmsystem.h>
+	<GL/glew.h>
+	<GL/glfw.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"SOIL.h"
+	"png++/png.hpp"
+	"include/Player.h"
+	"include/Level.h"
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\windows.h
+	<winresrc.h>
+	<stdarg.h>
+	<windef.h>
+	<wincon.h>
+	<winbase.h>
+	<wingdi.h>
+	<winuser.h>
+	<winnls.h>
+	<winver.h>
+	<winnetwk.h>
+	<winreg.h>
+	<winsvc.h>
+	<cderr.h>
+	<dde.h>
+	<ddeml.h>
+	<dlgs.h>
+	<imm.h>
+	<lzexpand.h>
+	<mmsystem.h>
+	<nb30.h>
+	<rpc.h>
+	<shellapi.h>
+	<winperf.h>
+	<commdlg.h>
+	<winspool.h>
+	<winsock2.h>
+	<winsock.h>
+	<ole2.h>
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winresrc.h
+	<winuser.h>
+	<winnt.h>
+	<winver.h>
+	<dde.h>
+	<dlgs.h>
+	<commctrl.h>
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\winuser.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winnt.h
+	<winerror.h>
+	<string.h>
+	<basetsd.h>
+	<pshpack4.h>
+	<poppack.h>
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winerror.h
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\string.h
+	<_mingw.h>
+	<stddef.h>
+
+1341013970 c:\program files (x86)\codeblocks\mingw\include\_mingw.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\basetsd.h
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\pshpack4.h
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\poppack.h
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\winver.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\dde.h
+
+1301114750 c:\program files (x86)\codeblocks\mingw\include\dlgs.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\commctrl.h
+	<prsht.h>
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\prsht.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\windef.h
+	<winnt.h>
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\wincon.h
+
+1301114760 c:\program files (x86)\codeblocks\mingw\include\winbase.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\wingdi.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winnls.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winnetwk.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winreg.h
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\winsvc.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\cderr.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\ddeml.h
+
+1301114750 c:\program files (x86)\codeblocks\mingw\include\imm.h
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\lzexpand.h
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\mmsystem.h
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\nb30.h
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpc.h
+	<windows.h>
+	<rpcdce.h>
+	<rpcnsi.h>
+	<rpcnterr.h>
+	<winerror.h>
+	<excpt.h>
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcdce.h
+	<basetyps.h>
+	<rpcdcep.h>
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\basetyps.h
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcdcep.h
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcnsi.h
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcnterr.h
+
+1341013972 c:\program files (x86)\codeblocks\mingw\include\excpt.h
+	<_mingw.h>
+	<windef.h>
+
+1301114760 c:\program files (x86)\codeblocks\mingw\include\shellapi.h
+	<pshpack2.h>
+	<poppack.h>
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\pshpack2.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winperf.h
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\commdlg.h
+	<unknwn.h>
+	<prsht.h>
+
+1301114760 c:\program files (x86)\codeblocks\mingw\include\unknwn.h
+	<windows.h>
+	<objfwd.h>
+	<wtypes.h>
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\objfwd.h
+	<basetyps.h>
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\wtypes.h
+	<rpc.h>
+	<rpcndr.h>
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcndr.h
+	<rpcnsip.h>
+	<objfwd.h>
+
+1301114758 c:\program files (x86)\codeblocks\mingw\include\rpcnsip.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winspool.h
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winsock2.h
+	<windows.h>
+
+1301114762 c:\program files (x86)\codeblocks\mingw\include\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\mswsock.h
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\ole2.h
+	<winerror.h>
+	<objbase.h>
+	<olectlid.h>
+	<oleauto.h>
+	<oleidl.h>
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\objbase.h
+	<rpc.h>
+	<rpcndr.h>
+	<stdlib.h>
+	<basetyps.h>
+	<wtypes.h>
+	<unknwn.h>
+	<objidl.h>
+	<cguid.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\stdlib.h
+	<_mingw.h>
+	<stddef.h>
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\objidl.h
+	<objfwd.h>
+
+1301114748 c:\program files (x86)\codeblocks\mingw\include\cguid.h
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\olectlid.h
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\oleauto.h
+	<oaidl.h>
+
+1301114754 c:\program files (x86)\codeblocks\mingw\include\oaidl.h
+	<windows.h>
+	<ole2.h>
+
+1301114756 c:\program files (x86)\codeblocks\mingw\include\oleidl.h
+	<objfwd.h>
+
+1344248612 c:\program files (x86)\codeblocks\mingw\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1341013972 c:\program files (x86)\codeblocks\mingw\include\inttypes.h
+	<_mingw.h>
+	<stdint.h>
+	<stddef.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\stdint.h
+	<stddef.h>
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1301114764 c:\program files (x86)\codeblocks\mingw\include\gl\gl.h
+
+1364425524 c:\program files (x86)\codeblocks\mingw\include\gl\glfw.h
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\glm.hpp
+	"core/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	<cstdio>
+	"core/setup.hpp"
+	"./core/_detail.hpp"
+	"./core/_vectorize.hpp"
+	"./core/type.hpp"
+	"./core/func_trigonometric.hpp"
+	"./core/func_exponential.hpp"
+	"./core/func_common.hpp"
+	"./core/func_packing.hpp"
+	"./core/func_geometric.hpp"
+	"./core/func_matrix.hpp"
+	"./core/func_vector_relational.hpp"
+	"./core/func_integer.hpp"
+	"./core/func_noise.hpp"
+	"./core/_swizzle.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\_fixes.hpp
+	<cmath>
+
+1363525090 c:\program files (x86)\codeblocks\mingw\include\glm\core\setup.hpp
+	<intrin.h>
+	<immintrin.h>
+	<immintrin.h>
+	<smmintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\_detail.hpp
+	"setup.hpp"
+	<cassert>
+	<cstdint>
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\_vectorize.hpp
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type.hpp
+	"type_half.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_gentype.hpp"
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat2x2.hpp"
+	"type_mat2x3.hpp"
+	"type_mat2x4.hpp"
+	"type_mat3x2.hpp"
+	"type_mat3x3.hpp"
+	"type_mat3x4.hpp"
+	"type_mat4x2.hpp"
+	"type_mat4x3.hpp"
+	"type_mat4x4.hpp"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_half.hpp
+	<cstdlib>
+	"type_half.inl"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_half.inl
+	"_detail.hpp"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_float.hpp
+	"type_half.hpp"
+	"setup.hpp"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_int.hpp
+	"setup.hpp"
+	"_detail.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_gentype.hpp
+	"type_size.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_size.hpp
+	<cstdlib>
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec1.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec1.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec.hpp
+	"type_gentype.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\_swizzle.hpp
+	"_swizzle_func.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\_swizzle_func.hpp
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec1.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec2.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec2.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec2.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec3.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec3.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec3.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec4.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec4.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_vec4.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x2.hpp
+	"type_mat.hpp"
+	"type_mat2x2.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat.hpp
+	"type_gentype.hpp"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x2.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x3.hpp
+	"type_mat.hpp"
+	"type_mat2x3.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x3.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x4.hpp
+	"type_mat.hpp"
+	"type_mat2x4.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat2x4.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x2.hpp
+	"type_mat.hpp"
+	"type_mat3x2.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x2.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x3.hpp
+	"type_mat.hpp"
+	"type_mat3x3.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x3.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x4.hpp
+	"type_mat.hpp"
+	"type_mat3x4.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat3x4.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x2.hpp
+	"type_mat.hpp"
+	"type_mat4x2.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x2.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x3.hpp
+	"type_mat.hpp"
+	"type_mat4x3.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x3.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x4.hpp
+	"type_mat.hpp"
+	"type_mat4x4.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\type_mat4x4.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_trigonometric.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_exponential.hpp
+	"func_exponential.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_exponential.inl
+
+1363526269 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_common.hpp
+	"_fixes.hpp"
+	"func_common.inl"
+
+1363528402 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_common.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_packing.hpp
+	"func_packing.inl"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_packing.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_geometric.hpp
+	"func_geometric.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_geometric.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_matrix.hpp
+	"func_matrix.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_matrix.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_vector_relational.hpp
+	"_detail.hpp"
+	"func_vector_relational.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_vector_relational.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_integer.hpp
+	"func_integer.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_integer.inl
+	<intrin.h>
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_noise.hpp
+	"func_noise.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\core\func_noise.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\matrix_transform.hpp
+	"../glm.hpp"
+	"matrix_transform.inl"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\matrix_transform.inl
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\type_ptr.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtc/quaternion.hpp"
+	<cstring>
+	"type_ptr.inl"
+
+1363526558 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\half_float.hpp
+	"../glm.hpp"
+	"half_float.inl"
+
+1363526076 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\half_float.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\quaternion.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtc/constants.hpp"
+	"quaternion.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\constants.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"constants.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\constants.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\quaternion.inl
+	<limits>
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtc\type_ptr.inl
+
+1215447208 c:\program files (x86)\codeblocks\mingw\include\soil.h
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\png.hpp
+	<png.h>
+	"config.hpp"
+	"types.hpp"
+	"error.hpp"
+	"color.hpp"
+	"palette.hpp"
+	"tRNS.hpp"
+	"packed_pixel.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"info_base.hpp"
+	"info.hpp"
+	"end_info.hpp"
+	"io_base.hpp"
+	"reader.hpp"
+	"writer.hpp"
+	"generator.hpp"
+	"consumer.hpp"
+	"pixel_buffer.hpp"
+	"require_color_space.hpp"
+	"convert_color_space.hpp"
+	"image.hpp"
+
+1244148012 c:\program files (x86)\codeblocks\mingw\include\png.h
+	"zlib.h"
+	"pngconf.h"
+	<crtdbg.h>
+
+1339675112 c:\program files (x86)\codeblocks\mingw\include\zlib.h
+	"zconf.h"
+
+1339675226 c:\program files (x86)\codeblocks\mingw\include\zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\limits.h
+	<_mingw.h>
+
+1341013980 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\unistd.h
+	<io.h>
+	<process.h>
+	<getopt.h>
+	<sys/types.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\io.h
+	<_mingw.h>
+	<sys/types.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\process.h
+	<_mingw.h>
+	<sys/types.h>
+	<stdint.h>
+
+1341013972 c:\program files (x86)\codeblocks\mingw\include\getopt.h
+	<_mingw.h>
+
+1244148012 c:\program files (x86)\codeblocks\mingw\include\pngconf.h
+	"pngusr.h"
+	"config.h"
+	<windows.h>
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<stdlib.h>
+	<fp.h>
+	<math.h>
+	<m68881.h>
+	<mem.h>
+	<alloc.h>
+	<malloc.h>
+	<time.h>
+	<dos.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\setjmp.h
+	<_mingw.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\strings.h
+	<string.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\math.h
+	<_mingw.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\mem.h
+	<string.h>
+
+1341013974 c:\program files (x86)\codeblocks\mingw\include\malloc.h
+	<_mingw.h>
+	<stdlib.h>
+
+1341013976 c:\program files (x86)\codeblocks\mingw\include\time.h
+	<_mingw.h>
+	<stddef.h>
+
+1341013972 c:\program files (x86)\codeblocks\mingw\include\dos.h
+	<_mingw.h>
+	<stddef.h>
+	<io.h>
+
+1366480234 c:\program files (x86)\codeblocks\mingw\include\png++\config.hpp
+	<endian.h>
+	<machine/endian.h>
+	<sys/_endian.h>
+	<machine/endian.h>
+	<sys/endian.h>
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\types.hpp
+	<png.h>
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\error.hpp
+	<stdexcept>
+	<cerrno>
+	<cstdlib>
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\color.hpp
+	"types.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\palette.hpp
+	<vector>
+	"color.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\trns.hpp
+	<vector>
+	"color.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\packed_pixel.hpp
+	"types.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\rgb_pixel.hpp
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\pixel_traits.hpp
+	<limits>
+	"types.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\rgba_pixel.hpp
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\gray_pixel.hpp
+	"types.hpp"
+	"packed_pixel.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\ga_pixel.hpp
+	<limits>
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\index_pixel.hpp
+	"types.hpp"
+	"packed_pixel.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\info_base.hpp
+	<cassert>
+	"error.hpp"
+	"types.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\info.hpp
+	<cassert>
+	"info_base.hpp"
+	"image_info.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\image_info.hpp
+	"types.hpp"
+	"palette.hpp"
+	"tRNS.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\end_info.hpp
+	"info_base.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\io_base.hpp
+	<cassert>
+	<cstdio>
+	<cstdarg>
+	"error.hpp"
+	"info.hpp"
+	"end_info.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\reader.hpp
+	<cassert>
+	"io_base.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\writer.hpp
+	<cassert>
+	"io_base.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\generator.hpp
+	<cassert>
+	<stdexcept>
+	<iostream>
+	<ostream>
+	"config.hpp"
+	"error.hpp"
+	"streaming_base.hpp"
+	"writer.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\streaming_base.hpp
+	<cassert>
+	"image_info.hpp"
+	"pixel_traits.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\consumer.hpp
+	<cassert>
+	<stdexcept>
+	<iostream>
+	<istream>
+	"config.hpp"
+	"error.hpp"
+	"streaming_base.hpp"
+	"reader.hpp"
+	"pixel_buffer.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\pixel_buffer.hpp
+	<cassert>
+	<cstddef>
+	<stdexcept>
+	<vector>
+	"packed_pixel.hpp"
+	"gray_pixel.hpp"
+	"index_pixel.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\require_color_space.hpp
+	"error.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"io_base.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\convert_color_space.hpp
+	"error.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"reader.hpp"
+	"writer.hpp"
+
+1288076294 c:\program files (x86)\codeblocks\mingw\include\png++\image.hpp
+	<fstream>
+	"pixel_buffer.hpp"
+	"generator.hpp"
+	"consumer.hpp"
+	"convert_color_space.hpp"
+
+1368564383 c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\include\player.h
+	<GL/glew.h>
+	<GL/glfw.h>
+	<cmath>
+	"SOIL.h"
+	"png++/png.hpp"
+	<vector>
+
+1368564468 source:c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\src\player.cpp
+	"../include/Player.h"
+
+1368561369 source:c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\src\level.cpp
+	"../include/Level.h"
+
+1368561369 c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\include\level.h
+	<GL/glew.h>
+	<GL/glfw.h>
+	<cmath>
+	"SOIL.h"
+	"png++/png.hpp"
+
+1368232750 source:c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\src\roligafunktioner.cpp
+	<GL/glfw.h>
+	<stdio.h>
+
+1368231468 c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\include\roligafunktioner.h
+	<GL/glfw.h>
+	<stdio.h>
+
+1368232750 c:\users\andreas\desktop\programmering\tnm061\opengl\codeblocksopengltest\opengltest\src\roligafunktioner.cpp
+	<GL/glfw.h>
+	<stdio.h>
+
+1369160232 source:c:\users\michael\documents\tnm061\project\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	<GL/glew.h>
+	<GL/glfw.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<common/shader.hpp>
+	<common/texture.hpp>
+	<common/controls.hpp>
+	<common/objloader.hpp>
+	<common/vboindexer.hpp>
+
+1215450808 c:\users\michael\documents\tnm061\project\soil.h
+
+1367090921 c:\users\michael\documents\tnm061\project\png++\png.hpp
+	"png.h"
+	"config.hpp"
+	"types.hpp"
+	"error.hpp"
+	"color.hpp"
+	"palette.hpp"
+	"tRNS.hpp"
+	"packed_pixel.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"info_base.hpp"
+	"info.hpp"
+	"end_info.hpp"
+	"io_base.hpp"
+	"reader.hpp"
+	"writer.hpp"
+	"generator.hpp"
+	"consumer.hpp"
+	"pixel_buffer.hpp"
+	"require_color_space.hpp"
+	"convert_color_space.hpp"
+	"image.hpp"
+
+1244151612 c:\users\michael\documents\tnm061\project\png++\png.h
+	"zlib.h"
+	"pngconf.h"
+	<crtdbg.h>
+
+1367198630 c:\users\michael\downloads\zlib-1.2.8\zlib.h
+	"zconf.h"
+
+1367193432 c:\users\michael\downloads\zlib-1.2.8\zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
+
+1244151612 c:\users\michael\documents\tnm061\project\png++\pngconf.h
+	"pngusr.h"
+	"config.h"
+	<windows.h>
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<stdlib.h>
+	<fp.h>
+	<math.h>
+	<m68881.h>
+	<mem.h>
+	<alloc.h>
+	<malloc.h>
+	<time.h>
+	<dos.h>
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\config.hpp
+	<endian.h>
+	<machine/endian.h>
+	<sys/_endian.h>
+	<machine/endian.h>
+	<sys/endian.h>
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\types.hpp
+	<png.h>
+
+1244151612 c:\users\michael\desktop\externals\libpng\include\png.h
+	"zlib.h"
+	"pngconf.h"
+	<crtdbg.h>
+
+1244151612 c:\users\michael\desktop\externals\libpng\include\pngconf.h
+	"pngusr.h"
+	"config.h"
+	<windows.h>
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<stdlib.h>
+	<fp.h>
+	<math.h>
+	<m68881.h>
+	<mem.h>
+	<alloc.h>
+	<malloc.h>
+	<time.h>
+	<dos.h>
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\error.hpp
+	<stdexcept>
+	<cerrno>
+	<cstdlib>
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\color.hpp
+	"types.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\palette.hpp
+	<vector>
+	"color.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\trns.hpp
+	<vector>
+	"color.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\packed_pixel.hpp
+	"types.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\rgb_pixel.hpp
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\pixel_traits.hpp
+	<limits>
+	"types.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\rgba_pixel.hpp
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\gray_pixel.hpp
+	"types.hpp"
+	"packed_pixel.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\ga_pixel.hpp
+	<limits>
+	"types.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\index_pixel.hpp
+	"types.hpp"
+	"packed_pixel.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\info_base.hpp
+	<cassert>
+	"error.hpp"
+	"types.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\info.hpp
+	<cassert>
+	"info_base.hpp"
+	"image_info.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\image_info.hpp
+	"types.hpp"
+	"palette.hpp"
+	"tRNS.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\end_info.hpp
+	"info_base.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\io_base.hpp
+	<cassert>
+	<cstdio>
+	<cstdarg>
+	"error.hpp"
+	"info.hpp"
+	"end_info.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\reader.hpp
+	<cassert>
+	"io_base.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\writer.hpp
+	<cassert>
+	"io_base.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\generator.hpp
+	<cassert>
+	<stdexcept>
+	<iostream>
+	<ostream>
+	"config.hpp"
+	"error.hpp"
+	"streaming_base.hpp"
+	"writer.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\streaming_base.hpp
+	<cassert>
+	"image_info.hpp"
+	"pixel_traits.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\consumer.hpp
+	<cassert>
+	<stdexcept>
+	<iostream>
+	<istream>
+	"config.hpp"
+	"error.hpp"
+	"streaming_base.hpp"
+	"reader.hpp"
+	"pixel_buffer.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\pixel_buffer.hpp
+	<cassert>
+	<cstddef>
+	<stdexcept>
+	<vector>
+	"packed_pixel.hpp"
+	"gray_pixel.hpp"
+	"index_pixel.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\require_color_space.hpp
+	"error.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"io_base.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\convert_color_space.hpp
+	"error.hpp"
+	"rgb_pixel.hpp"
+	"rgba_pixel.hpp"
+	"gray_pixel.hpp"
+	"ga_pixel.hpp"
+	"index_pixel.hpp"
+	"reader.hpp"
+	"writer.hpp"
+
+1288079894 c:\users\michael\documents\tnm061\project\png++\image.hpp
+	<fstream>
+	"pixel_buffer.hpp"
+	"generator.hpp"
+	"consumer.hpp"
+	"convert_color_space.hpp"
+
+1369089505 c:\users\michael\documents\tnm061\project\include\player.h
+	<cmath>
+	<GL/glew.h>
+	<GL/glfw.h>
+	"SOIL.h"
+	"png++/png.hpp"
+	<vector>
+	<GL/glew.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+
+1369090179 c:\users\michael\documents\tnm061\project\include\level.h
+	<GL/glew.h>
+	<GL/glfw.h>
+	<cmath>
+	"SOIL.h"
+	"png++/png.hpp"
+
+1368695347 source:c:\users\michael\documents\tnm061\project\src\level.cpp
+	"../include/Level.h"
+
+1368798637 source:c:\users\michael\documents\tnm061\project\src\player.cpp
+	"../include/Player.h"
+
+1344247148 source:c:\users\michael\desktop\test\glew-1.9.0\src\glew.c
+	<GL/glew.h>
+	<GL/wglew.h>
+	<GL/glxew.h>
+	<dlfcn.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+	<AvailabilityMacros.h>
+	<dlfcn.h>
+	<mach-o/dyld.h>
+
+1344248612 c:\program files (x86)\codeblocks\mingw\include\gl\wglew.h
+	<windows.h>
+
+1344248612 c:\program files (x86)\codeblocks\mingw\include\gl\glxew.h
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xmd.h>
+	<GL/glew.h>
+
+1367198630 c:\users\michael\documents\tnm061\project\zlib.h
+	"zconf.h"
+
+1369055835 c:\users\michael\documents\tnm061\project\src\shader.hpp
+
+1369055831 c:\users\michael\documents\tnm061\project\src\texture.hpp
+
+1369090179 source:c:\users\michael\documents\tnm061\project\src\shader.cpp
+	<stdio.h>
+	<string>
+	<vector>
+	<iostream>
+	<fstream>
+	<algorithm>
+	<stdlib.h>
+	<string.h>
+	<GL/glew.h>
+	"shader.hpp"
+
+1369091637 source:c:\users\michael\documents\tnm061\project\src\texture.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<GL/glew.h>
+	<GL/glfw.h>
+
+1369164909 source:c:\users\michael\documents\tnm061\project\common\controls.cpp
+	<cmath>
+	<GL/glfw.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	"controls.hpp"
+
+1369157174 c:\users\michael\documents\tnm061\project\common\controls.hpp
+
+1357668496 source:c:\users\michael\documents\tnm061\project\common\objloader.cpp
+	<vector>
+	<stdio.h>
+	<string>
+	<cstring>
+	<glm/glm.hpp>
+	"objloader.hpp"
+
+1357668496 c:\users\michael\documents\tnm061\project\common\objloader.hpp
+
+1357668496 source:c:\users\michael\documents\tnm061\project\common\quaternion_utils.cpp
+	<glm/gtc/quaternion.hpp>
+	<glm/gtx/quaternion.hpp>
+	<glm/gtx/euler_angles.hpp>
+	<glm/gtx/norm.hpp>
+	"quaternion_utils.hpp"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\quaternion.hpp
+	"../glm.hpp"
+	"../gtc/quaternion.hpp"
+	"quaternion.inl"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\quaternion.inl
+	<limits>
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\euler_angles.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"euler_angles.inl"
+
+1361377327 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\euler_angles.inl
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\norm.hpp
+	"../glm.hpp"
+	"../gtx/quaternion.hpp"
+	"norm.inl"
+
+1363491270 c:\program files (x86)\codeblocks\mingw\include\glm\gtx\norm.inl
+
+1357668496 c:\users\michael\documents\tnm061\project\common\quaternion_utils.hpp
+
+1357668496 source:c:\users\michael\documents\tnm061\project\common\shader.cpp
+	<stdio.h>
+	<string>
+	<vector>
+	<iostream>
+	<fstream>
+	<algorithm>
+	<stdlib.h>
+	<string.h>
+	<GL/glew.h>
+	"shader.hpp"
+
+1357668496 c:\users\michael\documents\tnm061\project\common\shader.hpp
+
+1357668496 source:c:\users\michael\documents\tnm061\project\common\tangentspace.cpp
+	<vector>
+	<glm/glm.hpp>
+	"tangentspace.hpp"
+
+1357668496 c:\users\michael\documents\tnm061\project\common\tangentspace.hpp
+
+1357668496 source:c:\users\michael\documents\tnm061\project\common\text2d.cpp
+	<vector>
+	<cstring>
+	<GL/glew.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	"shader.hpp"
+	"texture.hpp"
+	"text2D.hpp"
+
+1357668496 c:\users\michael\documents\tnm061\project\common\texture.hpp
+
+1357668496 c:\users\michael\documents\tnm061\project\common\text2d.hpp
+
+1369147472 source:c:\users\michael\documents\tnm061\project\common\texture.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<GL/glew.h>
+	<GL/glfw.h>
+
+1369147195 source:c:\users\michael\documents\tnm061\project\common\vboindexer.cpp
+	<vector>
+	<map>
+	<glm/glm.hpp>
+	"vboindexer.hpp"
+	<string.h>
+
+1357668496 c:\users\michael\documents\tnm061\project\common\vboindexer.hpp
+
