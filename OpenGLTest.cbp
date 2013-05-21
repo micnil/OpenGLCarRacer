@@ -48,8 +48,6 @@
 			<Add library="..\..\..\..\..\msys\1.0\glew-1.9.0\lib\libglew32mx.dll.a" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/lib" />
 		</Linker>
-		<Unit filename="common/controls.cpp" />
-		<Unit filename="common/controls.hpp" />
 		<Unit filename="common/objloader.cpp" />
 		<Unit filename="common/objloader.hpp" />
 		<Unit filename="common/shader.cpp" />
@@ -61,7 +59,9 @@
 		<Unit filename="common/texture.hpp" />
 		<Unit filename="common/vboindexer.cpp" />
 		<Unit filename="common/vboindexer.hpp" />
+		<Unit filename="include/Player.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Player.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

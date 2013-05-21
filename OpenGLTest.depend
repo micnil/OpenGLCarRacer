@@ -826,7 +826,7 @@
 	<GL/glfw.h>
 	<stdio.h>
 
-1369160232 source:c:\users\michael\documents\tnm061\project\main.cpp
+1369177430 source:c:\users\michael\documents\tnm061\project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<vector>
@@ -836,9 +836,9 @@
 	<glm/gtc/matrix_transform.hpp>
 	<common/shader.hpp>
 	<common/texture.hpp>
-	<common/controls.hpp>
 	<common/objloader.hpp>
 	<common/vboindexer.hpp>
+	<include/Player.h>
 
 1215450808 c:\users\michael\documents\tnm061\project\soil.h
 
@@ -1083,17 +1083,17 @@
 	"consumer.hpp"
 	"convert_color_space.hpp"
 
-1369089505 c:\users\michael\documents\tnm061\project\include\player.h
-	<cmath>
-	<GL/glew.h>
-	<GL/glfw.h>
-	"SOIL.h"
-	"png++/png.hpp"
+1369177779 c:\users\michael\documents\tnm061\project\include\player.h
 	<vector>
 	<GL/glew.h>
+	<GL/glfw.h>
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/type_ptr.hpp>
+	<common/shader.hpp>
+	<common/texture.hpp>
+	<common/objloader.hpp>
+	<common/vboindexer.hpp>
 
 1369090179 c:\users\michael\documents\tnm061\project\include\level.h
 	<GL/glew.h>
@@ -1105,7 +1105,7 @@
 1368695347 source:c:\users\michael\documents\tnm061\project\src\level.cpp
 	"../include/Level.h"
 
-1368798637 source:c:\users\michael\documents\tnm061\project\src\player.cpp
+1369177533 source:c:\users\michael\documents\tnm061\project\src\player.cpp
 	"../include/Player.h"
 
 1344247148 source:c:\users\michael\desktop\test\glew-1.9.0\src\glew.c
@@ -1156,7 +1156,7 @@
 	<GL/glew.h>
 	<GL/glfw.h>
 
-1369164909 source:c:\users\michael\documents\tnm061\project\common\controls.cpp
+1369172114 source:c:\users\michael\documents\tnm061\project\common\controls.cpp
 	<cmath>
 	<GL/glfw.h>
 	<glm/glm.hpp>
