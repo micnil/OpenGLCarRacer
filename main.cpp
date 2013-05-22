@@ -81,41 +81,128 @@ int main( void )
 
     //Skapa VAO
 	GLuint VertexArrayID[2];
-	glGenVertexArrays(1, &VertexArrayID[0]);
-	glBindVertexArray(VertexArrayID[0]);
+
+	//Skapa buffers
+    GLuint vertexbuffer[2];
+
+    GLuint uvbuffer[2];
+
+    GLuint normalbuffer[2];
+
+    GLuint elementbuffer[2];
 
     //Skapa spelare 1
     Player player1(0,0,'W','S','A','D');
 
+    glGenVertexArrays(1, &VertexArrayID[0]);
+    glBindVertexArray(VertexArrayID[0]);
 	// Load it into a VBO
-	GLuint vertexbuffer;
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glGenBuffers(1, &vertexbuffer[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
 	glBufferData(GL_ARRAY_BUFFER, player1.indexed_vertices.size() * sizeof(glm::vec3), &player1.indexed_vertices[0], GL_STATIC_DRAW);
 
-	GLuint uvbuffer;
-	glGenBuffers(1, &uvbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(
+			0,                  // attribute
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+    );
+
+    glGenBuffers(1, &uvbuffer[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[0]);
 	glBufferData(GL_ARRAY_BUFFER, player1.indexed_uvs.size() * sizeof(glm::vec2), &player1.indexed_uvs[0], GL_STATIC_DRAW);
 
-	GLuint normalbuffer;
-	glGenBuffers(1, &normalbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(
+        1,                                // attribute
+        2,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
+
+    glGenBuffers(1, &normalbuffer[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[0]);
 	glBufferData(GL_ARRAY_BUFFER, player1.indexed_normals.size() * sizeof(glm::vec3), &player1.indexed_normals[0], GL_STATIC_DRAW);
 
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(
+        2,                                // attribute
+        3,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
 	// Generate a buffer for the indices as well
-	GLuint elementbuffer;
-	glGenBuffers(1, &elementbuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+	glGenBuffers(1, &elementbuffer[0]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[0]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player1.indices.size() * sizeof(unsigned short), &player1.indices[0] , GL_STATIC_DRAW);
+
+    glBindVertexArray(0);
+	/// FÖRSÖK TILL SPELARE 2!
+
+	 //Skapa spelare 2
+    Player player2(5,5,'U','J','H','K');
+
+    glGenVertexArrays(1, &VertexArrayID[1]);
+    glBindVertexArray(VertexArrayID[1]);
+	// Load it into a VBO
+	glGenBuffers(1, &vertexbuffer[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+	glBufferData(GL_ARRAY_BUFFER, player2.indexed_vertices.size() * sizeof(glm::vec3), &player2.indexed_vertices[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(
+        0,                  // attribute
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
+    );
+    glGenBuffers(1, &uvbuffer[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[1]);
+	glBufferData(GL_ARRAY_BUFFER, player2.indexed_uvs.size() * sizeof(glm::vec2), &player2.indexed_uvs[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(
+        1,                                // attribute
+        2,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
+    glGenBuffers(1, &normalbuffer[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[1]);
+	glBufferData(GL_ARRAY_BUFFER, player2.indexed_normals.size() * sizeof(glm::vec3), &player2.indexed_normals[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(
+        2,                                // attribute
+        3,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
+
+	// Generate a buffer for the indices as well
+	glGenBuffers(1, &elementbuffer[1]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player2.indices.size() * sizeof(unsigned short), &player2.indices[0] , GL_STATIC_DRAW);
+
+
+    glBindVertexArray(0);
 
 	// Get a handle for our "LightPosition" uniform
 	glUseProgram(programID);
 	GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
-
-	// For speed computation
-	double lastTime = glfwGetTime();
-	int nbFrames = 0;
 
 	do{
 		// Clear the screen
@@ -124,12 +211,17 @@ int main( void )
 		// Use our shader
 		glUseProgram(programID);
 
+		glm::mat4 ProjectionMatrix = glm::mat4(1.0f);
+		glm::mat4 ViewMatrix = glm::mat4(1.0f);
+		glm::mat4 ModelMatrix = glm::mat4(1.0f);
+		glm::mat4 MVP = glm::mat4(1.0f);
+
 		// Compute the MVP matrix from keyboard and mouse input
 		player1.computeMatricesFromInputs();
-		glm::mat4 ProjectionMatrix = player1.getProjectionMatrix();
-		glm::mat4 ViewMatrix = player1.getViewMatrix();
-		glm::mat4 ModelMatrix = player1.getModelMatrix();
-		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+		ProjectionMatrix = player1.getProjectionMatrix();
+		ViewMatrix = player1.getViewMatrix();
+		ModelMatrix = player1.getModelMatrix();
+		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
@@ -146,44 +238,10 @@ int main( void )
 		// Set our "myTextureSampler" sampler to user Texture Unit 0
 		glUniform1i(TextureID, 0);
 
-        // 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-
-		// 2nd attribute buffer : UVs
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-		glVertexAttribPointer(
-			1,                                // attribute
-			2,                                // size
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-		);
-
-		// 3rd attribute buffer : normals
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-		glVertexAttribPointer(
-			2,                                // attribute
-			3,                                // size
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-		);
+        glBindVertexArray(VertexArrayID[0]);
 
 		// Index buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[0]);
 
 		// Draw the triangles !
 		glDrawElements(
@@ -193,9 +251,35 @@ int main( void )
 			(void*)0           // element array buffer offset
 		);
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
+        glBindVertexArray(0);
+
+        // Compute the MVP matrix from keyboard and mouse input
+		player2.computeMatricesFromInputs();
+		ProjectionMatrix = player2.getProjectionMatrix();
+		ViewMatrix = player2.getViewMatrix();
+		ModelMatrix = player2.getModelMatrix();
+		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+
+		// Send our transformation to the currently bound shader,
+		// in the "MVP" uniform
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
+		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
+
+		glBindVertexArray(VertexArrayID[1]);
+
+		// Index buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
+
+		// Draw the triangles !
+		glDrawElements(
+			GL_TRIANGLES,      // mode
+			player2.indices.size(),    // count
+			GL_UNSIGNED_SHORT,   // type
+			(void*)0           // element array buffer offset
+		);
+
+        glBindVertexArray(0);
 
 		// Swap buffers
 		glfwSwapBuffers();
@@ -205,10 +289,10 @@ int main( void )
 		   glfwGetWindowParam( GLFW_OPENED ) );
 
 	// Cleanup VBO and shader
-	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteBuffers(1, &uvbuffer);
-	glDeleteBuffers(1, &normalbuffer);
-	glDeleteBuffers(1, &elementbuffer);
+	glDeleteBuffers(1, &vertexbuffer[0]);
+	glDeleteBuffers(1, &uvbuffer[0]);
+	glDeleteBuffers(1, &normalbuffer[0]);
+	glDeleteBuffers(1, &elementbuffer[0]);
 	glDeleteProgram(programID);
 	glDeleteTextures(1, &Texture);
 	glDeleteVertexArrays(1, &VertexArrayID[0]);
