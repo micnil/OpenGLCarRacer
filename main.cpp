@@ -53,7 +53,6 @@ int main( void )
 
 	// Ensure we can capture the escape key being pressed below
 	glfwEnable( GLFW_STICKY_KEYS );
-	glfwSetMousePos(1024/2, 768/2);
 
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -65,10 +64,6 @@ int main( void )
 
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
-
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
 	GLuint programID = LoadShaders( "StandardShading.vertexshader", "StandardShading.fragmentshader" );
@@ -84,12 +79,15 @@ int main( void )
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
+    //Skapa VAO
+	GLuint VertexArrayID[2];
+	glGenVertexArrays(1, &VertexArrayID[0]);
+	glBindVertexArray(VertexArrayID[0]);
 
+    //Skapa spelare 1
     Player player1(0,0,'W','S','A','D');
 
-
 	// Load it into a VBO
-
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -120,17 +118,6 @@ int main( void )
 	int nbFrames = 0;
 
 	do{
-
-		// Measure speed
-		double currentTime = glfwGetTime();
-		nbFrames++;
-		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
-			// printf and reset
-			printf("%f ms/frame\n", 1000.0/double(nbFrames));
-			nbFrames = 0;
-			lastTime += 1.0;
-		}
-
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -159,7 +146,7 @@ int main( void )
 		// Set our "myTextureSampler" sampler to user Texture Unit 0
 		glUniform1i(TextureID, 0);
 
-		// 1rst attribute buffer : vertices
+        // 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(
@@ -224,7 +211,7 @@ int main( void )
 	glDeleteBuffers(1, &elementbuffer);
 	glDeleteProgram(programID);
 	glDeleteTextures(1, &Texture);
-	glDeleteVertexArrays(1, &VertexArrayID);
+	glDeleteVertexArrays(1, &VertexArrayID[0]);
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
