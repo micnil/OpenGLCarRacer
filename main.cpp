@@ -79,13 +79,13 @@ int main( void )
 	GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
 	// Load the texture
-	GLuint Texture = loadDDS("uvmap.DDS");
+	GLuint Texture = loadDDS("bild.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
 
-    Player player1(0,0,'a','d');
+    Player player1(0,0,'W','S','A','D');
 
 
 	// Load it into a VBO

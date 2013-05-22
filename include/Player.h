@@ -19,7 +19,7 @@ using namespace std;
 class Player
 {
 public:
-    Player(int startpos_x,int startpos_y, char left_key, char right_key);
+    Player(int startpos_x,int startpos_y, char up_key, char down_key, char left_key, char right_key);
 
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
@@ -38,8 +38,8 @@ public:
     // Initial Field of View
     float initialFoV = 45.0f;
 
-    float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=200.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
-    char leftKey, rightKey;
+    float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=300.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
+    char upKey, downKey, leftKey, rightKey;
 
 
 

@@ -3,13 +3,15 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-Player::Player(int startpos_x,int startpos_y, char left_key, char right_key)
+Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char left_key, char right_key)
 {
 
     x_pos = startpos_x;
     y_pos = startpos_y;
     leftKey = left_key;
     rightKey = right_key;
+    upKey = up_key;
+    downKey = down_key;
 
     // Read our .obj file
 	std::vector<glm::vec3> vertices;
@@ -50,15 +52,15 @@ void Player::computeMatricesFromInputs(){
     }
     else{
         if(rot_speed>0)
-            rot_speed-=150*timeDelay;
+            rot_speed-=250*timeDelay;
         else if(rot_speed<0)
-            rot_speed+=150*timeDelay;
+            rot_speed+=250*timeDelay;
     }
-    if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey('W') == GLFW_PRESS){
+    if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(upKey) == GLFW_PRESS){
         if(speed<max_speed)
             speed+=acceleration*timeDelay;
     }
-    else if(glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey('S') == GLFW_PRESS){
+    else if(glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(downKey) == GLFW_PRESS){
         if(speed>-max_speed)
             speed-=acceleration*timeDelay;
     }
@@ -69,7 +71,7 @@ void Player::computeMatricesFromInputs(){
             speed+=50*timeDelay;
     }
 
-    if(abs(speed)>3)
+    if(abs(speed)>7)
         r_pos = r_pos + (rot_speed * timeDelay);
     x_pos=x_pos+cos((r_pos*M_PI)/180)  * speed * timeDelay;
     y_pos=y_pos+sin((r_pos*M_PI)/180)  * speed * timeDelay;
