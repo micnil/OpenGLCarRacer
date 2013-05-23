@@ -17,7 +17,7 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("testBil2.obj", vertices, uvs, normals);
+	loadOBJ("testBil2.obj", vertices, uvs, normals);
 
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 
