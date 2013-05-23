@@ -4,8 +4,6 @@
 #include <vector>
 #include <iostream>
 
-//BAHS
-
 // Include GLEW
 #include <GL/glew.h>
 
@@ -83,22 +81,23 @@ int main( void )
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
     //Skapa VAO
-	GLuint VertexArrayID[2];
+	GLuint VertexArrayID[3];
 
 	//Skapa buffers
-    GLuint vertexbuffer[2];
+    GLuint vertexbuffer[3];
 
-    GLuint uvbuffer[2];
+    GLuint uvbuffer[3];
 
-    GLuint normalbuffer[2];
+    GLuint normalbuffer[3];
 
-    GLuint elementbuffer[2];
+    GLuint elementbuffer[3];
 
     //Skapa spelare 1
     Player player1(0,0,'W','S','A','D');
 
     glGenVertexArrays(1, &VertexArrayID[0]);
     glBindVertexArray(VertexArrayID[0]);
+
 	// Load it into a VBO
 	glGenBuffers(1, &vertexbuffer[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
@@ -147,7 +146,6 @@ int main( void )
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player1.indices.size() * sizeof(unsigned short), &player1.indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
-	/// FÖRSÖK TILL SPELARE 2!
 
 	 //Skapa spelare 2
     Player player2(5,5,'U','J','H','K');
@@ -200,6 +198,69 @@ int main( void )
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player2.indices.size() * sizeof(unsigned short), &player2.indices[0] , GL_STATIC_DRAW);
 
+    glBindVertexArray(0);
+
+    //Create Ground
+    std::vector<glm::vec3> vertices;
+	std::vector<glm::vec2> uvs;
+	std::vector<glm::vec3> normals;
+
+	loadOBJ("ground.obj", vertices, uvs, normals);
+
+	std::vector<unsigned short> indices;
+    std::vector<glm::vec3> indexed_vertices;
+	std::vector<glm::vec2> indexed_uvs;
+	std::vector<glm::vec3> indexed_normals;
+
+	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+
+    glGenVertexArrays(1, &VertexArrayID[2]);
+    glBindVertexArray(VertexArrayID[2]);
+	// Load it into a VBO
+	glGenBuffers(1, &vertexbuffer[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[2]);
+	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(
+        0,                  // attribute
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
+    );
+    glGenBuffers(1, &uvbuffer[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[2]);
+	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(
+        1,                                // attribute
+        2,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
+    glGenBuffers(1, &normalbuffer[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[2]);
+	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(
+        2,                                // attribute
+        3,                                // size
+        GL_FLOAT,                         // type
+        GL_FALSE,                         // normalized?
+        0,                                // stride
+        (void*)0                          // array buffer offset
+    );
+
+	// Generate a buffer for the indices as well
+	glGenBuffers(1, &elementbuffer[2]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[2]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 
@@ -221,12 +282,12 @@ int main( void )
         double currentTime = glfwGetTime();
         float timeDelay = float(currentTime - lastTime);
 
+        // For the next frame, the "last time" will be "now"
+        lastTime = currentTime;
+
         player1.computeMatricesFromInputs(timeDelay);
         player2.computeMatricesFromInputs(timeDelay);
 
-    std::cout << "player 1 modelMatrix.[0][0] = " << player1.getModelMatrix()[0][0] << "\n";
-    std::cout << "player 2 modelMatrix.[0][0] = " << player2.getModelMatrix()[0][0] << "\n";
-    std::cout << "\n";
 		glm::mat4 ProjectionMatrix;
 		glm::mat4 ViewMatrix;
 		glm::mat4 ModelMatrix;
@@ -275,8 +336,6 @@ int main( void )
         glBindVertexArray(0);
 
         // Compute the MVP matrix from keyboard and mouse input
-		//uProjectionMatrix = player2.getProjectionMatrix();
-		//ViewMatrix = player2.getViewMatrix();
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
@@ -284,7 +343,6 @@ int main( void )
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
-		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
 		glBindVertexArray(VertexArrayID[1]);
 
@@ -301,10 +359,26 @@ int main( void )
 
         glBindVertexArray(0);
 
-		// Swap buffers
+        ModelMatrix = glm::rotate(glm::mat4(1.0f), -90.0f, glm::vec3( 1.0f, 0.0f, 0.0f ) );//2
+        MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
-        // For the next frame, the "last time" will be "now"
-        lastTime = currentTime;
+        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glBindVertexArray(VertexArrayID[2]);
+
+		// Index buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[2]);
+
+        // Draw the triangles !
+		glDrawElements(
+			GL_TRIANGLES,      // mode
+			indices.size(),    // count
+			GL_UNSIGNED_SHORT,   // type
+			(void*)0           // element array buffer offset
+		);
+        glBindVertexArray(0);
+		// Swap buffers
 		glfwSwapBuffers();
 
 	} // Check if the ESC key was pressed or the window was closed

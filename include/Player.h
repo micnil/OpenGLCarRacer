@@ -26,12 +26,9 @@ public:
 	std::vector<glm::vec2> indexed_uvs;
 	std::vector<glm::vec3> indexed_normals;
 
-
-
 	glm::mat4 getViewMatrix();
 	glm::mat4 getModelMatrix();
 	glm::mat4 getProjectionMatrix();
-
 
 	void computeMatricesFromInputs(float deltaTime);
 
@@ -40,9 +37,6 @@ public:
 
     float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=300.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
     char upKey, downKey, leftKey, rightKey;
-
-
-
 
 private:
 	glm::mat4 ViewMatrix;
