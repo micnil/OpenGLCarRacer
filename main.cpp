@@ -97,6 +97,7 @@ int main( void )
 
     glGenVertexArrays(1, &VertexArrayID[0]);
     glBindVertexArray(VertexArrayID[0]);
+
 	// Load it into a VBO
 	glGenBuffers(1, &vertexbuffer[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
@@ -145,7 +146,6 @@ int main( void )
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player1.indices.size() * sizeof(unsigned short), &player1.indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
-	/// FÖRSÖK TILL SPELARE 2!
 
 	 //Skapa spelare 2
     Player player2(5,5,'U','J','H','K');
@@ -198,7 +198,6 @@ int main( void )
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player2.indices.size() * sizeof(unsigned short), &player2.indices[0] , GL_STATIC_DRAW);
 
-
     glBindVertexArray(0);
 
 	// Get a handle for our "LightPosition" uniform
@@ -222,9 +221,6 @@ int main( void )
         player1.computeMatricesFromInputs(timeDelay);
         player2.computeMatricesFromInputs(timeDelay);
 
-    std::cout << "player 1 modelMatrix.[0][0] = " << player1.getModelMatrix()[0][0] << "\n";
-    std::cout << "player 2 modelMatrix.[0][0] = " << player2.getModelMatrix()[0][0] << "\n";
-    std::cout << "\n";
 		glm::mat4 ProjectionMatrix;
 		glm::mat4 ViewMatrix;
 		glm::mat4 ModelMatrix;
@@ -267,8 +263,6 @@ int main( void )
         glBindVertexArray(0);
 
         // Compute the MVP matrix from keyboard and mouse input
-		//uProjectionMatrix = player2.getProjectionMatrix();
-		//ViewMatrix = player2.getViewMatrix();
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
