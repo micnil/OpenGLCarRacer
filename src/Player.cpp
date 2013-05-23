@@ -33,14 +33,7 @@ glm::mat4 Player::getModelMatrix(){
 	return ModelMatrix;
 }
 
-void Player::computeMatricesFromInputs(){
-
-	// glfwGetTime is called only once, the first time this function is called
-	static double lastTime = glfwGetTime();
-
-	// Compute time difference between current and last frame
-	double currentTime = glfwGetTime();
-	float timeDelay = float(currentTime - lastTime);
+void Player::computeMatricesFromInputs(float timeDelay){
 
    if ((glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(leftKey) == GLFW_PRESS)){
         if(rot_speed>-rot_max_speed)
@@ -97,7 +90,4 @@ void Player::computeMatricesFromInputs(){
     ModelMatrix = glm::rotate(ModelMatrix, -90.0f, glm::vec3( 0.0f, 0.0f, 1.0f ) );//2
 	ModelMatrix = glm::rotate(ModelMatrix, 270.0f, glm::vec3( 1.0f, 0.0f, 0.0f ) );//1
 
-
-	// For the next frame, the "last time" will be "now"
-	lastTime = currentTime;
 }

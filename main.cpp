@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <iostream>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -211,9 +212,19 @@ int main( void )
 		// Use our shader
 		glUseProgram(programID);
 
-        player1.computeMatricesFromInputs();
-        player2.computeMatricesFromInputs();
+        // glfwGetTime is called only once, the first time this function is called
+        static double lastTime = glfwGetTime();
 
+        // Compute time difference between current and last frame
+        double currentTime = glfwGetTime();
+        float timeDelay = float(currentTime - lastTime);
+
+        player1.computeMatricesFromInputs(timeDelay);
+        player2.computeMatricesFromInputs(timeDelay);
+
+    std::cout << "player 1 modelMatrix.[0][0] = " << player1.getModelMatrix()[0][0] << "\n";
+    std::cout << "player 2 modelMatrix.[0][0] = " << player2.getModelMatrix()[0][0] << "\n";
+    std::cout << "\n";
 		glm::mat4 ProjectionMatrix;
 		glm::mat4 ViewMatrix;
 		glm::mat4 ModelMatrix;
@@ -256,8 +267,8 @@ int main( void )
         glBindVertexArray(0);
 
         // Compute the MVP matrix from keyboard and mouse input
-		ProjectionMatrix = player2.getProjectionMatrix();
-		ViewMatrix = player2.getViewMatrix();
+		//uProjectionMatrix = player2.getProjectionMatrix();
+		//ViewMatrix = player2.getViewMatrix();
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
@@ -283,6 +294,9 @@ int main( void )
         glBindVertexArray(0);
 
 		// Swap buffers
+
+        // For the next frame, the "last time" will be "now"
+        lastTime = currentTime;
 		glfwSwapBuffers();
 
 	} // Check if the ESC key was pressed or the window was closed

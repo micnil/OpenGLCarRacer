@@ -33,7 +33,7 @@ public:
 	glm::mat4 getProjectionMatrix();
 
 
-	void computeMatricesFromInputs();
+	void computeMatricesFromInputs(float deltaTime);
 
     // Initial Field of View
     float initialFoV = 45.0f;
