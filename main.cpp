@@ -103,12 +103,12 @@ int main( void )
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(
-			0,                  // attribute
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
+        0,                  // attribute
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
     );
 
     glGenBuffers(1, &uvbuffer[0]);
@@ -211,13 +211,15 @@ int main( void )
 		// Use our shader
 		glUseProgram(programID);
 
-		glm::mat4 ProjectionMatrix = glm::mat4(1.0f);
-		glm::mat4 ViewMatrix = glm::mat4(1.0f);
-		glm::mat4 ModelMatrix = glm::mat4(1.0f);
-		glm::mat4 MVP = glm::mat4(1.0f);
+        player1.computeMatricesFromInputs();
+        player2.computeMatricesFromInputs();
+
+		glm::mat4 ProjectionMatrix;
+		glm::mat4 ViewMatrix;
+		glm::mat4 ModelMatrix;
+		glm::mat4 MVP;
 
 		// Compute the MVP matrix from keyboard and mouse input
-		player1.computeMatricesFromInputs();
 		ProjectionMatrix = player1.getProjectionMatrix();
 		ViewMatrix = player1.getViewMatrix();
 		ModelMatrix = player1.getModelMatrix();
@@ -254,7 +256,6 @@ int main( void )
         glBindVertexArray(0);
 
         // Compute the MVP matrix from keyboard and mouse input
-		player2.computeMatricesFromInputs();
 		ProjectionMatrix = player2.getProjectionMatrix();
 		ViewMatrix = player2.getViewMatrix();
 		ModelMatrix = player2.getModelMatrix();
