@@ -76,7 +76,7 @@ void Player::computeMatricesFromInputs(float timeDelay){
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 512.0f);
 
 	// Camera matrix
-	glm::vec3 position = glm::vec3( 0.0f, 0.0f, -200.0f );
+	glm::vec3 position = glm::vec3( 0.0f, 0.0f, -25.0f );
     glm::vec3 direction = glm::vec3( 0, 0, 1.0f );
     glm::vec3 up = glm::vec3( 0,  1.0f, 0);
 	ViewMatrix       = glm::lookAt(

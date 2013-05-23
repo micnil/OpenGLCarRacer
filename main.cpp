@@ -77,7 +77,7 @@ int main( void )
 	GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
 	// Load the texture
-	GLuint Texture = loadDDS("bild.DDS");
+	GLuint Texture = loadDDS("texture.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
@@ -246,6 +246,12 @@ int main( void )
 
 		glm::vec3 lightPos = glm::vec3(0,0,-100);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
+
+        //Parameters to fit our texture
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
