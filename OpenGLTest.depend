@@ -826,7 +826,7 @@
 	<GL/glfw.h>
 	<stdio.h>
 
-1369393821 source:c:\users\michael\documents\tnm061\project\main.cpp
+1369401751 source:c:\users\michael\documents\tnm061\project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<vector>
@@ -1084,8 +1084,9 @@
 	"consumer.hpp"
 	"convert_color_space.hpp"
 
-1369394550 c:\users\michael\documents\tnm061\project\include\player.h
+1369418061 c:\users\michael\documents\tnm061\project\include\player.h
 	<vector>
+	<cmath>
 	<GL/glew.h>
 	<GL/glfw.h>
 	<glm/glm.hpp>
@@ -1109,7 +1110,7 @@
 1368695347 source:c:\users\michael\documents\tnm061\project\src\level.cpp
 	"../include/Level.h"
 
-1369392686 source:c:\users\michael\documents\tnm061\project\src\player.cpp
+1369417846 source:c:\users\michael\documents\tnm061\project\src\player.cpp
 	"../include/Player.h"
 
 1344247148 source:c:\users\michael\desktop\test\glew-1.9.0\src\glew.c

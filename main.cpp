@@ -152,7 +152,7 @@ int main( void )
 		glm::mat4 ModelMatrix;
 		glm::mat4 MVP;
 
-        glm::vec3 lightPos = glm::vec3(0,0,-100);
+        glm::vec3 lightPos = glm::vec3(0,0,-512);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 		// Bind our texture in Texture Unit 0

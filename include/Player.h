@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <vector>
+#include <cmath>
 #include <GL/glew.h>
 #include <GL/glfw.h>
 #include <glm/glm.hpp>
@@ -41,6 +42,8 @@ public:
 	glm::mat4 getViewMatrix();
 	glm::mat4 getModelMatrix();
 	glm::mat4 getProjectionMatrix();
+    glm::vec3 getMaxVertexValues();
+    glm::vec3 getMinVertexValues();
 
 	void computeMatricesFromInputs(float deltaTime);
 	int collisionCheck(float x, float y);
@@ -52,6 +55,7 @@ public:
 
     float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=300.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
     char upKey, downKey, leftKey, rightKey;
+    float bounding_max_x, bounding_max_y, bounding_min_y, bounding_min_x;
 
     vector< vector<int> > collArray;
 

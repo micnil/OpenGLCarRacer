@@ -22,6 +22,13 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 	generateBuffers();
 
+    glm::vec3 min_values = getMinVertexValues();
+    glm::vec3 max_values = getMaxVertexValues();
+    bounding_max_y = abs(max_values.y);
+    bounding_max_x = abs(max_values.x);
+    bounding_min_y = abs(min_values.y);
+    bounding_min_x = abs(min_values.x);
+
     collArray.resize(512);
     png::image<png::rgb_pixel> img("image/Bana1.png");       //Laddar in kartans kollisioner
     for(int i=0;i<512;i++) //Räknar ut kollision, allt svart(röd under 10, tihihi) kan man inte åka på
@@ -187,11 +194,14 @@ void Player::deleteBuffers()
 }
 
 int Player::collisionCheck(float x, float y){
-    int colW = 6; //Kollar av kollisionen på väggen/ storleken på kuben plus väggens tjocklek(1)
+
     int maxH = 512/2, maxW = 512/2;
     //Laddar in värden för kollisions arrayen så den bara kollar av värden där kuben kan åka inom den "framen", +/-5 för att jag har ingen aning om varför, men ska vara där annars funkar den dåligt, kan ökas
-    int checkBox = 6; //Hur många ut från mitten av kuben som ska kollas av. Kubens storlek(5) + väggens storlek(1) = 6
-    double checkAreaUpp = y_pos +checkBox, checkAreaNer = y_pos -checkBox, checkAreaHoger = x_pos +checkBox, checkAreaVanster = x_pos -checkBox;
+    int checkBox = 1; //Hur många ut från mitten av kuben som ska kollas av. Kubens storlek(5) + väggens storlek(1) = 6
+    double  checkAreaUpp = y+bounding_max_y,
+            checkAreaNer = y-bounding_min_y,
+            checkAreaHoger = x+bounding_max_x,
+            checkAreaVanster = x-bounding_min_x;
 
     //Kollar av så att man inte kollar utanför arrayen
     if (checkAreaUpp > maxH)
@@ -209,12 +219,12 @@ int Player::collisionCheck(float x, float y){
         {
             if (collArray[i+maxH][j+maxW] == 1) //Kollision
             {
-                if (i-colW < x && x < i+colW && j-5 < y && y < j+colW)
+                if ( i-bounding_min_x < x && x < i+bounding_max_x && j-bounding_min_y < y && y < j+bounding_max_y)
                     return 1;
             }
             if (collArray[i+maxH][j+maxW] == 2) //Boost
             {
-                if ( i-colW < x && x < i+colW && j-5 < y && y < j+colW){
+                if ( i-bounding_min_x < x && x < i+bounding_max_x && j-bounding_min_y < y && y < j+bounding_max_y){
                     speed = 200.0;
                     return 0;
                 }
@@ -224,4 +234,22 @@ int Player::collisionCheck(float x, float y){
     return 0;
     //Bilden laddas in från X0-XN och Y0-YN medans planet laddas in i origo i mitten
     //därför körs collArrray på +höjd/bredd
+}
+
+glm::vec3 Player::getMaxVertexValues(){
+    glm::vec3 maxValues = indexed_vertices[0];
+    for(int i = 1; i<indexed_vertices.size(); ++i){
+        if(indexed_vertices[i].x > maxValues.x) maxValues.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].z > maxValues.y) maxValues.y = indexed_vertices[i].z;
+    }
+    return maxValues;
+}
+
+glm::vec3 Player::getMinVertexValues(){
+    glm::vec3 minValues = indexed_vertices[0];
+    for(int i = 1; i<indexed_vertices.size(); ++i){
+        if(indexed_vertices[i].x < minValues.x) minValues.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].z < minValues.y) minValues.y = indexed_vertices[i].z;
+    }
+    return minValues;
 }
