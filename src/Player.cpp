@@ -22,6 +22,31 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 	generateBuffers();
 
+    collArray.resize(512);
+    png::image<png::rgb_pixel> img("image/Bana1.png");       //Laddar in kartans kollisioner
+    for(int i=0;i<512;i++) //Räknar ut kollision, allt svart(röd under 10, tihihi) kan man inte åka på
+    {
+        vector<int> row;        //Lägga in alla rader först för att kunna snedriva/spegla skiten(arrayen) bilden läses ej från 0.0)
+        row.resize(512);
+        collArray.push_back(row);
+    }
+
+    for(int i=0;i<512;i++) //Räknar ut kollision, allt svart kan man inte åka på
+    {
+		for(int j=0;j<512;j++)
+		{
+			if(img[i][j].red < 11 && img[i][j].green < 11 && img[i][j].blue < 11)
+			{
+				collArray[j].push_back( 1 );
+			}
+			else if(250 < img[i][j].green && img[i][j].green < 256){
+				collArray[j].push_back( 2 );
+			}
+			else
+                collArray[j].push_back( 0 );
+		}
+	}
+
 }
 
 glm::mat4 Player::getViewMatrix(){
@@ -64,20 +89,24 @@ void Player::computeMatricesFromInputs(float timeDelay){
         if(speed<0)
             speed+=50*timeDelay;
     }
+    //Gör en temp x och y position för var vi försöker köra, och kollar sedan om det är någon kollision där. om inte; så uppdaterar vi x_pos och y_pos.
+    float temp_x_pos=x_pos+cos((r_pos*M_PI)/180)  * speed * timeDelay;
+    float temp_y_pos=y_pos+sin((r_pos*M_PI)/180)  * speed * timeDelay;
 
     if(abs(speed)>7)
         r_pos = r_pos + (rot_speed * timeDelay);
-    x_pos=x_pos+cos((r_pos*M_PI)/180)  * speed * timeDelay;
-    y_pos=y_pos+sin((r_pos*M_PI)/180)  * speed * timeDelay;
-
+    if(collisionCheck(temp_x_pos,temp_y_pos)!=1){
+    x_pos=temp_x_pos;
+    y_pos= temp_y_pos;
+    }
 
 	float FoV = initialFoV - 5 * glfwGetMouseWheel();
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 512.0f);
+	ProjectionMatrix = glm::perspective(FoV,(float)800 / (float)800, 0.1f, 513.0f );
 
 	// Camera matrix
-	glm::vec3 position = glm::vec3( 0.0f, 0.0f, -200.0f );
+	glm::vec3 position = glm::vec3( 0.0f, 0.0f, -512.0f );
     glm::vec3 direction = glm::vec3( 0, 0, 1.0f );
     glm::vec3 up = glm::vec3( 0,  1.0f, 0);
 	ViewMatrix       = glm::lookAt(
@@ -155,4 +184,44 @@ void Player::deleteBuffers()
 	glDeleteBuffers(1, &normalbuffer);
 	glDeleteBuffers(1, &elementbuffer);
 	glDeleteVertexArrays(1, &VertexArrayID);
+}
+
+int Player::collisionCheck(float x, float y){
+    int colW = 6; //Kollar av kollisionen på väggen/ storleken på kuben plus väggens tjocklek(1)
+    int maxH = 512/2, maxW = 512/2;
+    //Laddar in värden för kollisions arrayen så den bara kollar av värden där kuben kan åka inom den "framen", +/-5 för att jag har ingen aning om varför, men ska vara där annars funkar den dåligt, kan ökas
+    int checkBox = 6; //Hur många ut från mitten av kuben som ska kollas av. Kubens storlek(5) + väggens storlek(1) = 6
+    double checkAreaUpp = y_pos +checkBox, checkAreaNer = y_pos -checkBox, checkAreaHoger = x_pos +checkBox, checkAreaVanster = x_pos -checkBox;
+
+    //Kollar av så att man inte kollar utanför arrayen
+    if (checkAreaUpp > maxH)
+        checkAreaUpp = maxH;
+    if (checkAreaNer < -maxH)
+        checkAreaNer = -maxH;
+    if (checkAreaHoger > maxW)
+        checkAreaHoger = maxW;
+    if (checkAreaVanster < -maxW)
+        checkAreaVanster = -maxW;
+
+    for(int i=checkAreaVanster;i<checkAreaHoger;i++)
+    {
+        for(int j=checkAreaNer;j<checkAreaUpp;j++)
+        {
+            if (collArray[i+maxH][j+maxW] == 1) //Kollision
+            {
+                if (i-colW < x && x < i+colW && j-5 < y && y < j+colW)
+                    return 1;
+            }
+            if (collArray[i+maxH][j+maxW] == 2) //Boost
+            {
+                if ( i-colW < x && x < i+colW && j-5 < y && y < j+colW){
+                    speed = 200.0;
+                    return 0;
+                }
+            }
+        }
+    }
+    return 0;
+    //Bilden laddas in från X0-XN och Y0-YN medans planet laddas in i origo i mitten
+    //därför körs collArrray på +höjd/bredd
 }

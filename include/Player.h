@@ -7,11 +7,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <windows.h>
+#include <mmsystem.h>
+
 #include <common/shader.hpp>
 #include <common/texture.hpp>
 #include <common/objloader.hpp>
 #include <common/vboindexer.hpp>
-
+#include "png++/png.hpp"
 
 using namespace std;
 
@@ -40,6 +43,7 @@ public:
 	glm::mat4 getProjectionMatrix();
 
 	void computeMatricesFromInputs(float deltaTime);
+	int collisionCheck(float x, float y);
 	void generateBuffers();
 	void deleteBuffers();
 
@@ -48,6 +52,8 @@ public:
 
     float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=300.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
     char upKey, downKey, leftKey, rightKey;
+
+    vector< vector<int> > collArray;
 
 private:
 	glm::mat4 ViewMatrix;
