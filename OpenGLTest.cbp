@@ -27,6 +27,7 @@
 					<Add library="..\..\..\..\..\msys\1.0\glew-1.9.0\lib\libglew32.dll.a" />
 					<Add library="..\..\..\..\..\msys\1.0\glew-1.9.0\lib\libglew32mx.a" />
 					<Add library="..\..\..\..\..\msys\1.0\glew-1.9.0\lib\libglew32mx.dll.a" />
+					<Add library="..\..\..\..\..\Program Files (x86)\CodeBlocks\MinGW\lib\libglew32.a" />
 					<Add library="..\..\..\..\..\Program Files (x86)\CodeBlocks\MinGW\lib\libopengl32.a" />
 					<Add directory="../../../../../Program Files (x86)/CodeBlocks/MinGW/lib" />
 				</Linker>

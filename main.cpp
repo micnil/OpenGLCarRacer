@@ -21,50 +21,11 @@ using namespace glm;
 #include <common/vboindexer.hpp>
 #include <include/Player.h>
 
+void initSettings();
+
 int main( void )
 {
-	// Initialise GLFW
-	if( !glfwInit() )
-	{
-		fprintf( stderr, "Failed to initialize GLFW\n" );
-		return -1;
-	}
-
-	glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// Open a window and create its OpenGL context
-	if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
-	{
-		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-		glfwTerminate();
-		return -1;
-	}
-
-	// Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		return -1;
-	}
-
-	glfwSetWindowTitle( "OpenGl" );
-
-	// Ensure we can capture the escape key being pressed below
-	glfwEnable( GLFW_STICKY_KEYS );
-
-	// Dark blue background
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-
-	// Enable depth test
-	glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it closer to the camera than the former one
-	glDepthFunc(GL_LESS);
-
-	// Cull triangles which normal is not towards the camera
-	glEnable(GL_CULL_FACE);
+    initSettings();
 
 	// Create and compile our GLSL program from the shaders
 	GLuint programID = LoadShaders( "StandardShading.vertexshader", "StandardShading.fragmentshader" );
@@ -74,133 +35,31 @@ int main( void )
 	GLuint ViewMatrixID = glGetUniformLocation(programID, "V");
 	GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
-	// Load the texture
-	GLuint Texture = loadDDS("texture.DDS");
+	// Load the textures
+	GLuint Texture[2];
+	Texture[0] = loadDDS("texture.DDS");
+	Texture[1] = loadDDS("image/Bana1.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
-    //Skapa VAO
-	GLuint VertexArrayID[3];
+    //Skapa VAO till plan
+	GLuint VertexArrayID;
 
-	//Skapa buffers
-    GLuint vertexbuffer[3];
-
-    GLuint uvbuffer[3];
-
-    GLuint normalbuffer[3];
-
-    GLuint elementbuffer[3];
+	//Skapa buffers till plan
+    GLuint vertexbuffer;
+    GLuint uvbuffer;
+    GLuint normalbuffer;
+    GLuint elementbuffer;
 
     //Skapa spelare 1
     Player player1(0,0,'W','S','A','D');
 
-    glGenVertexArrays(1, &VertexArrayID[0]);
-    glBindVertexArray(VertexArrayID[0]);
-
-	// Load it into a VBO
-	glGenBuffers(1, &vertexbuffer[0]);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
-	glBufferData(GL_ARRAY_BUFFER, player1.indexed_vertices.size() * sizeof(glm::vec3), &player1.indexed_vertices[0], GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(
-        0,                  // attribute
-        3,                  // size
-        GL_FLOAT,           // type
-        GL_FALSE,           // normalized?
-        0,                  // stride
-        (void*)0            // array buffer offset
-    );
-
-    glGenBuffers(1, &uvbuffer[0]);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[0]);
-	glBufferData(GL_ARRAY_BUFFER, player1.indexed_uvs.size() * sizeof(glm::vec2), &player1.indexed_uvs[0], GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(
-        1,                                // attribute
-        2,                                // size
-        GL_FLOAT,                         // type
-        GL_FALSE,                         // normalized?
-        0,                                // stride
-        (void*)0                          // array buffer offset
-    );
-
-    glGenBuffers(1, &normalbuffer[0]);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[0]);
-	glBufferData(GL_ARRAY_BUFFER, player1.indexed_normals.size() * sizeof(glm::vec3), &player1.indexed_normals[0], GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(
-        2,                                // attribute
-        3,                                // size
-        GL_FLOAT,                         // type
-        GL_FALSE,                         // normalized?
-        0,                                // stride
-        (void*)0                          // array buffer offset
-    );
-	// Generate a buffer for the indices as well
-	glGenBuffers(1, &elementbuffer[0]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[0]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player1.indices.size() * sizeof(unsigned short), &player1.indices[0] , GL_STATIC_DRAW);
-
-    glBindVertexArray(0);
-
 	 //Skapa spelare 2
-    Player player2(5,5,'U','J','H','K');
+    Player player2(0,10,'U','J','H','K');
 
-    glGenVertexArrays(1, &VertexArrayID[1]);
-    glBindVertexArray(VertexArrayID[1]);
-	// Load it into a VBO
-	glGenBuffers(1, &vertexbuffer[1]);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
-	glBufferData(GL_ARRAY_BUFFER, player2.indexed_vertices.size() * sizeof(glm::vec3), &player2.indexed_vertices[0], GL_STATIC_DRAW);
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(
-        0,                  // attribute
-        3,                  // size
-        GL_FLOAT,           // type
-        GL_FALSE,           // normalized?
-        0,                  // stride
-        (void*)0            // array buffer offset
-    );
-    glGenBuffers(1, &uvbuffer[1]);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[1]);
-	glBufferData(GL_ARRAY_BUFFER, player2.indexed_uvs.size() * sizeof(glm::vec2), &player2.indexed_uvs[0], GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(
-        1,                                // attribute
-        2,                                // size
-        GL_FLOAT,                         // type
-        GL_FALSE,                         // normalized?
-        0,                                // stride
-        (void*)0                          // array buffer offset
-    );
-    glGenBuffers(1, &normalbuffer[1]);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[1]);
-	glBufferData(GL_ARRAY_BUFFER, player2.indexed_normals.size() * sizeof(glm::vec3), &player2.indexed_normals[0], GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(
-        2,                                // attribute
-        3,                                // size
-        GL_FLOAT,                         // type
-        GL_FALSE,                         // normalized?
-        0,                                // stride
-        (void*)0                          // array buffer offset
-    );
-
-	// Generate a buffer for the indices as well
-	glGenBuffers(1, &elementbuffer[1]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, player2.indices.size() * sizeof(unsigned short), &player2.indices[0] , GL_STATIC_DRAW);
-
-    glBindVertexArray(0);
-
-    //Create Ground
+    //SKAPA PLAN ATT KÖRA PÅ
     std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
@@ -214,11 +73,11 @@ int main( void )
 
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 
-    glGenVertexArrays(1, &VertexArrayID[2]);
-    glBindVertexArray(VertexArrayID[2]);
+    glGenVertexArrays(1, &VertexArrayID);
+    glBindVertexArray(VertexArrayID);
 	// Load it into a VBO
-	glGenBuffers(1, &vertexbuffer[2]);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[2]);
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
@@ -230,8 +89,8 @@ int main( void )
         0,                  // stride
         (void*)0            // array buffer offset
     );
-    glGenBuffers(1, &uvbuffer[2]);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer[2]);
+    glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(1);
@@ -243,8 +102,8 @@ int main( void )
         0,                                // stride
         (void*)0                          // array buffer offset
     );
-    glGenBuffers(1, &normalbuffer[2]);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer[2]);
+    glGenBuffers(1, &normalbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(2);
@@ -258,8 +117,8 @@ int main( void )
     );
 
 	// Generate a buffer for the indices as well
-	glGenBuffers(1, &elementbuffer[2]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[2]);
+	glGenBuffers(1, &elementbuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
 
     glBindVertexArray(0);
@@ -293,6 +152,24 @@ int main( void )
 		glm::mat4 ModelMatrix;
 		glm::mat4 MVP;
 
+        glm::vec3 lightPos = glm::vec3(0,0,-100);
+		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
+
+
+
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Texture[0]);
+		// Set our "myTextureSampler" sampler to user Texture Unit 0
+		glUniform1i(TextureID, 0);
+
+        //Parameters to fit our texture
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+        //BIL 1
 		// Compute the MVP matrix from keyboard and mouse input
 		ProjectionMatrix = player1.getProjectionMatrix();
 		ViewMatrix = player1.getViewMatrix();
@@ -305,25 +182,10 @@ int main( void )
 		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
-		glm::vec3 lightPos = glm::vec3(0,0,-100);
-		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
-
-        //Parameters to fit our texture
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-		// Bind our texture in Texture Unit 0
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, Texture);
-		// Set our "myTextureSampler" sampler to user Texture Unit 0
-		glUniform1i(TextureID, 0);
-
-        glBindVertexArray(VertexArrayID[0]);
+        glBindVertexArray(player1.VertexArrayID);
 
 		// Index buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[0]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, player1.elementbuffer);
 
 		// Draw the triangles !
 		glDrawElements(
@@ -335,6 +197,7 @@ int main( void )
 
         glBindVertexArray(0);
 
+        //BIL 2
         // Compute the MVP matrix from keyboard and mouse input
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
@@ -344,10 +207,10 @@ int main( void )
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 
-		glBindVertexArray(VertexArrayID[1]);
+		glBindVertexArray(player2.VertexArrayID);
 
 		// Index buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[1]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, player2.elementbuffer);
 
 		// Draw the triangles !
 		glDrawElements(
@@ -359,16 +222,25 @@ int main( void )
 
         glBindVertexArray(0);
 
+        //PLANET
         ModelMatrix = glm::rotate(glm::mat4(1.0f), -90.0f, glm::vec3( 1.0f, 0.0f, 0.0f ) );//2
         MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 
-        glBindVertexArray(VertexArrayID[2]);
+
+        // Bind our texture in Texture Unit 1
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, Texture[1]);
+
+		// Set our "myTextureSampler" sampler to user Texture Unit 1
+		glUniform1i(TextureID, 1);
+
+        glBindVertexArray(VertexArrayID);
 
 		// Index buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer[2]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
         // Draw the triangles !
 		glDrawElements(
@@ -386,17 +258,65 @@ int main( void )
 		   glfwGetWindowParam( GLFW_OPENED ) );
 
 	// Cleanup VBO and shader
-	glDeleteBuffers(1, &vertexbuffer[0]);
-	glDeleteBuffers(1, &uvbuffer[0]);
-	glDeleteBuffers(1, &normalbuffer[0]);
-	glDeleteBuffers(1, &elementbuffer[0]);
+	glDeleteBuffers(1, &vertexbuffer);
+	glDeleteBuffers(1, &uvbuffer);
+	glDeleteBuffers(1, &normalbuffer);
+	glDeleteBuffers(1, &elementbuffer);
 	glDeleteProgram(programID);
-	glDeleteTextures(1, &Texture);
-	glDeleteVertexArrays(1, &VertexArrayID[0]);
+	glDeleteTextures(1, &Texture[0]);
+	glDeleteVertexArrays(1, &VertexArrayID);
+
+	player1.deleteBuffers();
+	player2.deleteBuffers();
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 
 	return 0;
+}
+
+void initSettings()
+{
+// Initialise GLFW
+	if( !glfwInit() )
+	{
+		fprintf( stderr, "Failed to initialize GLFW\n" );
+	}
+
+	glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
+	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	// Open a window and create its OpenGL context
+	if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
+	{
+		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+		glfwTerminate();
+
+	}
+
+	// Initialize GLEW
+	glewExperimental = true; // Needed for core profile
+	if (glewInit() != GLEW_OK) {
+		fprintf(stderr, "Failed to initialize GLEW\n");
+
+	}
+
+	glfwSetWindowTitle( "OpenGl" );
+
+    // Ensure we can capture the escape key being pressed below
+	glfwEnable( GLFW_STICKY_KEYS );
+
+	// Dark blue background
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+
+	// Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
+
+	// Cull triangles which normal is not towards the camera
+	glEnable(GL_CULL_FACE);
 }
 

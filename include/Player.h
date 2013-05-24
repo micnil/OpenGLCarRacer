@@ -1,4 +1,3 @@
-#define GLEW_STATIC
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <vector>
@@ -21,16 +20,28 @@ class Player
 public:
     Player(int startpos_x,int startpos_y, char up_key, char down_key, char left_key, char right_key);
 
+    //vetices and attributes
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
 	std::vector<glm::vec2> indexed_uvs;
 	std::vector<glm::vec3> indexed_normals;
+
+    //VAO
+    GLuint VertexArrayID;
+
+    //Buffers
+    GLuint vertexbuffer;
+    GLuint uvbuffer;
+    GLuint normalbuffer;
+    GLuint elementbuffer;
 
 	glm::mat4 getViewMatrix();
 	glm::mat4 getModelMatrix();
 	glm::mat4 getProjectionMatrix();
 
 	void computeMatricesFromInputs(float deltaTime);
+	void generateBuffers();
+	void deleteBuffers();
 
     // Initial Field of View
     float initialFoV = 45.0f;
