@@ -22,15 +22,16 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 	generateBuffers();
 
-    glm::vec3 min_values = getMinVertexValues();
-    glm::vec3 max_values = getMaxVertexValues();
-    bounding_max_y = abs(max_values.y);
-    bounding_max_x = abs(max_values.x);
-    bounding_min_y = abs(min_values.y);
-    bounding_min_x = abs(min_values.x);
+    //Hämta hörnpunkter för kollisionshantering
+    up_right_values = getURVertexValues();
+    up_left_values = getULVertexValues();
+    down_right_values = getDRVertexValues();
+    down_left_values = getDLVertexValues();
+
+    cout<< bounding_max_y << " : " << bounding_max_x << " : " << bounding_min_y << " : " << bounding_min_x << endl;
 
     collArray.resize(512);
-    png::image<png::rgb_pixel> img("image/Bana1.png");       //Laddar in kartans kollisioner
+    png::image<png::rgb_pixel> img("image/test2.png");       //Laddar in kartans kollisioner
     for(int i=0;i<512;i++) //Räknar ut kollision, allt svart(röd under 10, tihihi) kan man inte åka på
     {
         vector<int> row;        //Lägga in alla rader först för att kunna snedriva/spegla skiten(arrayen) bilden läses ej från 0.0)
@@ -85,6 +86,8 @@ void Player::computeMatricesFromInputs(float timeDelay){
     if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(upKey) == GLFW_PRESS){
         if(speed<max_speed)
             speed+=acceleration*timeDelay;
+        else
+            speed-=acceleration*timeDelay;
     }
     else if(glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(downKey) == GLFW_PRESS){
         if(speed>-max_speed)
@@ -96,16 +99,39 @@ void Player::computeMatricesFromInputs(float timeDelay){
         if(speed<0)
             speed+=50*timeDelay;
     }
-    //Gör en temp x och y position för var vi försöker köra, och kollar sedan om det är någon kollision där. om inte; så uppdaterar vi x_pos och y_pos.
-    float temp_x_pos=x_pos+cos((r_pos*M_PI)/180)  * speed * timeDelay;
-    float temp_y_pos=y_pos+sin((r_pos*M_PI)/180)  * speed * timeDelay;
 
-    if(abs(speed)>7)
+    if(abs(speed)>7 && collisionCheck(timeDelay, r_pos)!=1)
         r_pos = r_pos + (rot_speed * timeDelay);
-    if(collisionCheck(temp_x_pos,temp_y_pos)!=1){
-    x_pos=temp_x_pos;
-    y_pos= temp_y_pos;
+    if(collisionCheck(timeDelay, r_pos)!=1)
+    {
+        x_pos = x_pos + cos((r_pos*M_PI)/180)  * speed * timeDelay;
+        y_pos = y_pos + sin((r_pos*M_PI)/180)  * speed * timeDelay;
     }
+    else if (rot_speed > 100 && collisionCheck(timeDelay,r_pos+80)!=1)
+    {
+        x_pos = x_pos + cos(((r_pos+80)*M_PI)/180)  * speed * timeDelay;
+        y_pos = y_pos + sin(((r_pos+80)*M_PI)/180)  * speed * timeDelay;
+    }
+    else if (rot_speed < -100 && collisionCheck(timeDelay,r_pos-80)!=1)
+    {
+        x_pos = x_pos + cos(((r_pos-80)*M_PI)/180)  * speed * timeDelay;
+        y_pos = y_pos + sin(((r_pos-80)*M_PI)/180)  * speed * timeDelay;
+    }
+    /*else{
+
+        y_temp1=y_pos+sin((r_pos*M_PI+45)/180)  * speed * timeDelay;
+        x_temp1=x_pos+cos((r_pos*M_PI+45)/180)  * speed * timeDelay;
+        y_temp2=y_pos+sin((r_pos*M_PI-45)/180)  * speed * timeDelay;
+        x_temp2=x_pos+cos((r_pos*M_PI-45)/180)  * speed * timeDelay;
+            if(collisionCheck(x_temp1,y_temp1)!=1){
+                x_pos=x_temp1;
+                y_pos= y_temp1;
+            }
+            else if(collisionCheck(x_temp2,y_temp2)!=1){
+                x_pos=x_temp2;
+                y_pos= y_temp2;
+            }
+    }*/
 
 	float FoV = initialFoV - 5 * glfwGetMouseWheel();
 
@@ -193,63 +219,81 @@ void Player::deleteBuffers()
 	glDeleteVertexArrays(1, &VertexArrayID);
 }
 
-int Player::collisionCheck(float x, float y){
-
+int Player::collisionCheck(float timeDelay, float rotation){
+    // kolla hörnpunkterna endast
     int maxH = 512/2, maxW = 512/2;
-    //Laddar in värden för kollisions arrayen så den bara kollar av värden där kuben kan åka inom den "framen", +/-5 för att jag har ingen aning om varför, men ska vara där annars funkar den dåligt, kan ökas
-    int checkBox = 1; //Hur många ut från mitten av kuben som ska kollas av. Kubens storlek(5) + väggens storlek(1) = 6
-    double  checkAreaUpp = y+bounding_max_y,
-            checkAreaNer = y-bounding_min_y,
-            checkAreaHoger = x+bounding_max_x,
-            checkAreaVanster = x-bounding_min_x;
+    glm::vec4 corner_coords_DL = ModelMatrix * down_left_values;
+    glm::vec4 corner_coords_UR = ModelMatrix * up_right_values;
+    glm::vec4 corner_coords_DR = ModelMatrix * down_right_values;
+    glm::vec4 corner_coords_UL = ModelMatrix * up_left_values;
 
-    //Kollar av så att man inte kollar utanför arrayen
-    if (checkAreaUpp > maxH)
-        checkAreaUpp = maxH;
-    if (checkAreaNer < -maxH)
-        checkAreaNer = -maxH;
-    if (checkAreaHoger > maxW)
-        checkAreaHoger = maxW;
-    if (checkAreaVanster < -maxW)
-        checkAreaVanster = -maxW;
+    corner_coords_DL.x=corner_coords_DL.x+cos((rotation*M_PI)/180)  * speed * timeDelay;
+    corner_coords_DL.y=corner_coords_DL.y+sin((rotation*M_PI)/180)  * speed * timeDelay;
 
-    for(int i=checkAreaVanster;i<checkAreaHoger;i++)
-    {
-        for(int j=checkAreaNer;j<checkAreaUpp;j++)
-        {
-            if (collArray[i+maxH][j+maxW] == 1) //Kollision
-            {
-                if ( i-bounding_min_x < x && x < i+bounding_max_x && j-bounding_min_y < y && y < j+bounding_max_y)
-                    return 1;
-            }
-            if (collArray[i+maxH][j+maxW] == 2) //Boost
-            {
-                if ( i-bounding_min_x < x && x < i+bounding_max_x && j-bounding_min_y < y && y < j+bounding_max_y){
-                    speed = 200.0;
-                    return 0;
-                }
-            }
-        }
+    corner_coords_UR.x=corner_coords_UR.x+cos((rotation*M_PI)/180)  * speed * timeDelay;
+    corner_coords_UR.y=corner_coords_UR.y+sin((rotation*M_PI)/180)  * speed * timeDelay;
+
+    corner_coords_DR.x=corner_coords_DR.x+cos((rotation*M_PI)/180)  * speed * timeDelay;
+    corner_coords_DR.y=corner_coords_DR.y+sin((rotation*M_PI)/180)  * speed * timeDelay;
+
+    corner_coords_UL.x=corner_coords_UL.x+cos((rotation*M_PI)/180)  * speed * timeDelay;
+    corner_coords_UL.y=corner_coords_UL.y+sin((rotation*M_PI)/180)  * speed * timeDelay;
+
+
+    if (collArray[corner_coords_DL.x + maxW][corner_coords_DL.y + maxH] == 1 ||
+        collArray[corner_coords_UR.x + maxW][corner_coords_UR.y + maxH] == 1 ||
+        collArray[corner_coords_DR.x + maxW][corner_coords_DR.y + maxH] == 1 ||
+        collArray[corner_coords_UL.x + maxW][corner_coords_UL.y + maxH] == 1 ){ //Kollision
+            return 1;
     }
+    if (collArray[corner_coords_DL.x + maxW][corner_coords_DL.y + maxH] == 2 ||
+        collArray[corner_coords_UR.x + maxW][corner_coords_UR.y + maxH] == 2 ||
+        collArray[corner_coords_DR.x + maxW][corner_coords_DR.y + maxH] == 2 ||
+        collArray[corner_coords_UL.x + maxW][corner_coords_UL.y + maxH] == 2 ){ //speed
+            speed=200;
+            return 0;
+    }
+
     return 0;
     //Bilden laddas in från X0-XN och Y0-YN medans planet laddas in i origo i mitten
     //därför körs collArrray på +höjd/bredd
 }
 
-glm::vec3 Player::getMaxVertexValues(){
-    glm::vec3 maxValues = indexed_vertices[0];
+glm::vec4 Player::getURVertexValues(){
+    glm::vec4 coordinates = glm::vec4(indexed_vertices[0], 1);
     for(int i = 1; i<indexed_vertices.size(); ++i){
-        if(indexed_vertices[i].x > maxValues.x) maxValues.x = indexed_vertices[i].x;
-        if(indexed_vertices[i].z > maxValues.y) maxValues.y = indexed_vertices[i].z;
+        if(indexed_vertices[i].x > coordinates.x) coordinates.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].y > coordinates.y) coordinates.y = indexed_vertices[i].y;
+        if(indexed_vertices[i].z > coordinates.z) coordinates.z = indexed_vertices[i].z;
     }
-    return maxValues;
+    return coordinates;
 }
 
-glm::vec3 Player::getMinVertexValues(){
-    glm::vec3 minValues = indexed_vertices[0];
+glm::vec4 Player::getDLVertexValues(){
+    glm::vec4 coordinates = glm::vec4(indexed_vertices[0], 1);
     for(int i = 1; i<indexed_vertices.size(); ++i){
-        if(indexed_vertices[i].x < minValues.x) minValues.x = indexed_vertices[i].x;
-        if(indexed_vertices[i].z < minValues.y) minValues.y = indexed_vertices[i].z;
+        if(indexed_vertices[i].x < coordinates.x) coordinates.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].y < coordinates.y) coordinates.y = indexed_vertices[i].y;
+        if(indexed_vertices[i].z < coordinates.z) coordinates.z = indexed_vertices[i].z;
     }
-    return minValues;
+    return coordinates;
+}
+
+glm::vec4 Player::getDRVertexValues(){
+    glm::vec4 coordinates = glm::vec4(indexed_vertices[0], 1);
+    for(int i = 1; i<indexed_vertices.size(); ++i){
+        if(indexed_vertices[i].x < coordinates.x) coordinates.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].y > coordinates.y) coordinates.y = indexed_vertices[i].y;
+        if(indexed_vertices[i].z > coordinates.z) coordinates.z = indexed_vertices[i].z;
+    }
+    return coordinates;
+}
+glm::vec4 Player::getULVertexValues(){
+    glm::vec4 coordinates = glm::vec4(indexed_vertices[0], 1);
+    for(int i = 1; i<indexed_vertices.size(); ++i){
+        if(indexed_vertices[i].x > coordinates.x) coordinates.x = indexed_vertices[i].x;
+        if(indexed_vertices[i].y < coordinates.y) coordinates.y = indexed_vertices[i].y;
+        if(indexed_vertices[i].z < coordinates.z) coordinates.z = indexed_vertices[i].z;
+    }
+    return coordinates;
 }

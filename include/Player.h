@@ -42,18 +42,27 @@ public:
 	glm::mat4 getViewMatrix();
 	glm::mat4 getModelMatrix();
 	glm::mat4 getProjectionMatrix();
-    glm::vec3 getMaxVertexValues();
-    glm::vec3 getMinVertexValues();
+
+    //Hämta hörnpunkter för kollisionshantering
+    glm::vec4 getURVertexValues();
+    glm::vec4 getULVertexValues();
+    glm::vec4 getDRVertexValues();
+    glm::vec4 getDLVertexValues();
+
+    glm::vec4 down_left_values;
+    glm::vec4 up_right_values;
+    glm::vec4 down_right_values;
+    glm::vec4 up_left_values;
 
 	void computeMatricesFromInputs(float deltaTime);
-	int collisionCheck(float x, float y);
+	int collisionCheck(float timeDelay, float rotation);
 	void generateBuffers();
 	void deleteBuffers();
 
     // Initial Field of View
     float initialFoV = 45.0f;
 
-    float x_pos, y_pos, r_pos=0.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=300.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
+    float x_pos, y_pos, r_pos=180.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=350.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
     char upKey, downKey, leftKey, rightKey;
     float bounding_max_x, bounding_max_y, bounding_min_y, bounding_min_x;
 

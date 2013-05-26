@@ -91,6 +91,7 @@ GLuint loadDDS(const char * imagepath){
 		height /= 2;
 	}
 
+
 	free(buffer);
 
 	return textureID;

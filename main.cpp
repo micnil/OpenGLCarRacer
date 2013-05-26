@@ -38,7 +38,7 @@ int main( void )
 	// Load the textures
 	GLuint Texture[2];
 	Texture[0] = loadDDS("texture.DDS");
-	Texture[1] = loadDDS("image/Bana1.DDS");
+	Texture[1] = loadDDS("image/test2.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
