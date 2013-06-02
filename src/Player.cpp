@@ -3,7 +3,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char left_key, char right_key)
+Player::Player(int startpos_x,int startpos_y,int up_key, int down_key, int left_key, int right_key)
 {
 
     x_pos = startpos_x;
@@ -31,7 +31,7 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
     down_left_values = getDLVertexValues();
 
     collArray.resize(512);
-    png::image<png::rgb_pixel> img("image/test2.png");       //Laddar in kartans kollisioner
+    png::image<png::rgb_pixel> img("image/bananas.png");       //Laddar in kartans kollisioner
     for(int i=0;i<512;i++) //Räknar ut kollision, allt svart(röd under 10, tihihi) kan man inte åka på
     {
         vector<int> row;        //Lägga in alla rader först för att kunna snedriva/spegla skiten(arrayen) bilden läses ej från 0.0)
@@ -48,8 +48,11 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 			{
 				collArray[j].push_back( 1 );
 			}
-			else if(250 < img[i][j].green && img[i][j].green < 256){
+			else if(250 < img[i][j].red && img[i][j].red < 256){
 				collArray[j].push_back( 2 );
+			}
+            else if(160 < img[i][j].green && img[i][j].green < 256){
+				collArray[j].push_back( 3 );
 			}
 			else
                 collArray[j].push_back( 0 );
@@ -80,9 +83,9 @@ void Player::computeMatricesFromInputs(float timeDelay){
     }
     else{
         if(rot_speed>0)
-            rot_speed-=300*timeDelay;
+            rot_speed-=600*timeDelay;
         else if(rot_speed<0)
-            rot_speed+=300*timeDelay;
+            rot_speed+=600*timeDelay;
     }
     if (glfwGetKey(upKey) == GLFW_PRESS){
         if(speed<max_speed)
@@ -238,10 +241,17 @@ int Player::collisionCheck(float timeDelay, float rotation){
         collArray[corner_coords_UR.x + maxW][corner_coords_UR.y + maxH] == 2 ||
         collArray[corner_coords_DR.x + maxW][corner_coords_DR.y + maxH] == 2 ||
         collArray[corner_coords_UL.x + maxW][corner_coords_UL.y + maxH] == 2 ){ //speed
-            speed=200;
+            speed=300;
             return 0;
     }
-
+        if (collArray[corner_coords_DL.x + maxW][corner_coords_DL.y + maxH] == 3 ||
+        collArray[corner_coords_UR.x + maxW][corner_coords_UR.y + maxH] == 3 ||
+        collArray[corner_coords_DR.x + maxW][corner_coords_DR.y + maxH] == 3 ||
+        collArray[corner_coords_UL.x + maxW][corner_coords_UL.y + maxH] == 3 ){ //speed
+            max_speed=100;
+            return 0;
+    }
+    max_speed=170;
     return 0;
     //Bilden laddas in från X0-XN och Y0-YN medans planet laddas in i origo i mitten
     //därför körs collArrray på +höjd/bredd

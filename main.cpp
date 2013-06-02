@@ -36,9 +36,10 @@ int main( void )
 	GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
 	// Load the textures
-	GLuint Texture[2];
-	Texture[0] = loadDDS("texture.DDS");
-	Texture[1] = loadDDS("image/test2.DDS");
+	GLuint Texture[3];
+	Texture[0] = loadDDS("texture1.DDS");
+	Texture[1] = loadDDS("image/bananas.DDS");
+	Texture[2] = loadDDS("texture2.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
@@ -55,10 +56,10 @@ int main( void )
     glGenBuffers(1, &wallvertexbuffer);
 
     //Skapa spelare 1
-    Player player1(0,0,'W','S','A','D');
+    Player player1(0,-390,'W','S','A','D');
 
 	 //Skapa spelare 2
-    Player player2(0,10,'U','J','H','K');
+    Player player2(0,-325,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_LEFT,GLFW_KEY_RIGHT);
 
 
     //SKAPA PLAN ATT KÖRA PÅ
@@ -154,7 +155,7 @@ int main( void )
 		glm::mat4 ModelMatrix;
 		glm::mat4 MVP;
 
-        glm::vec3 lightPos = glm::vec3(0,0,-512);
+        glm::vec3 lightPos = glm::vec3(0,700,-512);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 		// Bind our texture in Texture Unit 0
@@ -197,11 +198,16 @@ int main( void )
 
         glBindVertexArray(0);
 
+        // Bind our texture in Texture Unit 0;
+        glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Texture[2]);
+		// Set our "myTextureSampler" sampler to user Texture Unit 0
+		glUniform1i(TextureID, 0);
+
         //BIL 2
         // Compute the MVP matrix from keyboard and mouse input
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
-
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
@@ -292,7 +298,7 @@ void initSettings()
 
 	// Open a window and create its OpenGL context
 	//if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
-	if( !glfwOpenWindow( 800, 800, 0,0,0,0, 32,0, GLFW_WINDOW ) )
+	if( !glfwOpenWindow( 1024,768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
 	{
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		glfwTerminate();
