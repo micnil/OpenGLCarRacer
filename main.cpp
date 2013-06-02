@@ -51,6 +51,8 @@ int main( void )
     GLuint uvbuffer;
     GLuint normalbuffer;
     GLuint elementbuffer;
+    GLuint wallvertexbuffer;
+    glGenBuffers(1, &wallvertexbuffer);
 
     //Skapa spelare 1
     Player player1(0,0,'W','S','A','D');
@@ -200,6 +202,7 @@ int main( void )
 		ModelMatrix = player2.getModelMatrix();
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
+
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
@@ -247,6 +250,7 @@ int main( void )
 			GL_UNSIGNED_SHORT,   // type
 			(void*)0           // element array buffer offset
 		);
+
         glBindVertexArray(0);
 		// Swap buffers
 		glfwSwapBuffers();

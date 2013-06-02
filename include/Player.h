@@ -43,7 +43,7 @@ public:
 	glm::mat4 getModelMatrix();
 	glm::mat4 getProjectionMatrix();
 
-    //Hämta hörnpunkter för kollisionshantering
+    //Hämta hörnpunkter på bilen för kollisionshantering UR= up-right, UL=up-left, DR=down-right, DL=down-left.
     glm::vec4 getURVertexValues();
     glm::vec4 getULVertexValues();
     glm::vec4 getDRVertexValues();
@@ -60,11 +60,10 @@ public:
 	void deleteBuffers();
 
     // Initial Field of View
-    float initialFoV = 45.0f;
+    float initialFoV = 52.0f;
 
-    float x_pos, y_pos, r_pos=180.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=350.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
+    float x_pos, y_pos, r_pos=180.0 , model_speed=0.0 , rot_speed=0.0f, rot_max_speed=150.0f,rot_acceleration=400.0f, speed=0.0f , max_speed = 80.0f, acceleration=120.0f;
     char upKey, downKey, leftKey, rightKey;
-    float bounding_max_x, bounding_max_y, bounding_min_y, bounding_min_x;
 
     vector< vector<int> > collArray;
 

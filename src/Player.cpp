@@ -17,7 +17,9 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	loadOBJ("testBil2.obj", vertices, uvs, normals);
+	loadOBJ("car.obj", vertices, uvs, normals);
+
+
 
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
 	generateBuffers();
@@ -28,14 +30,13 @@ Player::Player(int startpos_x,int startpos_y,char up_key, char down_key, char le
     down_right_values = getDRVertexValues();
     down_left_values = getDLVertexValues();
 
-    cout<< bounding_max_y << " : " << bounding_max_x << " : " << bounding_min_y << " : " << bounding_min_x << endl;
-
     collArray.resize(512);
     png::image<png::rgb_pixel> img("image/test2.png");       //Laddar in kartans kollisioner
     for(int i=0;i<512;i++) //Räknar ut kollision, allt svart(röd under 10, tihihi) kan man inte åka på
     {
         vector<int> row;        //Lägga in alla rader först för att kunna snedriva/spegla skiten(arrayen) bilden läses ej från 0.0)
         row.resize(512);
+
         collArray.push_back(row);
     }
 
@@ -69,27 +70,27 @@ glm::mat4 Player::getModelMatrix(){
 
 void Player::computeMatricesFromInputs(float timeDelay){
 
-   if ((glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(leftKey) == GLFW_PRESS)){
+   if (glfwGetKey(leftKey) == GLFW_PRESS){
         if(rot_speed>-rot_max_speed)
             rot_speed-=rot_acceleration*timeDelay;
     }
-    else if ((glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS || glfwGetKey(rightKey) == GLFW_PRESS)){
+    else if ( glfwGetKey(rightKey) == GLFW_PRESS){
         if(rot_speed<rot_max_speed)
             rot_speed+=rot_acceleration*timeDelay;
     }
     else{
         if(rot_speed>0)
-            rot_speed-=250*timeDelay;
+            rot_speed-=300*timeDelay;
         else if(rot_speed<0)
-            rot_speed+=250*timeDelay;
+            rot_speed+=300*timeDelay;
     }
-    if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(upKey) == GLFW_PRESS){
+    if (glfwGetKey(upKey) == GLFW_PRESS){
         if(speed<max_speed)
             speed+=acceleration*timeDelay;
         else
             speed-=acceleration*timeDelay;
     }
-    else if(glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(downKey) == GLFW_PRESS){
+    else if(glfwGetKey(downKey) == GLFW_PRESS){
         if(speed>-max_speed)
             speed-=acceleration*timeDelay;
     }
@@ -117,21 +118,7 @@ void Player::computeMatricesFromInputs(float timeDelay){
         x_pos = x_pos + cos(((r_pos-80)*M_PI)/180)  * speed * timeDelay;
         y_pos = y_pos + sin(((r_pos-80)*M_PI)/180)  * speed * timeDelay;
     }
-    /*else{
 
-        y_temp1=y_pos+sin((r_pos*M_PI+45)/180)  * speed * timeDelay;
-        x_temp1=x_pos+cos((r_pos*M_PI+45)/180)  * speed * timeDelay;
-        y_temp2=y_pos+sin((r_pos*M_PI-45)/180)  * speed * timeDelay;
-        x_temp2=x_pos+cos((r_pos*M_PI-45)/180)  * speed * timeDelay;
-            if(collisionCheck(x_temp1,y_temp1)!=1){
-                x_pos=x_temp1;
-                y_pos= y_temp1;
-            }
-            else if(collisionCheck(x_temp2,y_temp2)!=1){
-                x_pos=x_temp2;
-                y_pos= y_temp2;
-            }
-    }*/
 
 	float FoV = initialFoV - 5 * glfwGetMouseWheel();
 
@@ -147,10 +134,11 @@ void Player::computeMatricesFromInputs(float timeDelay){
 								position+direction, // and looks here : at the same position, plus "direction"
 								up                  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
-
-    ModelMatrix = glm::translate(glm::mat4(1.0f),glm::vec3(x_pos,y_pos,1.0f));//4
+    ModelMatrix= glm::scale(glm::mat4(1.0f),glm::vec3(0.5f, 0.5f ,0.5f));
+    ModelMatrix = glm::translate(ModelMatrix,glm::vec3(x_pos,y_pos,1.0f));//4
     ModelMatrix = glm::rotate(ModelMatrix, r_pos, glm::vec3( 0.0f, 0.0f, 1.0f ) );//3
-    ModelMatrix = glm::rotate(ModelMatrix, -90.0f, glm::vec3( 0.0f, 0.0f, 1.0f ) );//2
+    //ModelMatrix = glm::rotate(ModelMatrix, -90.0f, glm::vec3( 0.0f, 0.0f, 1.0f ) );//2
+    //ModelMatrix = glm::rotate(ModelMatrix, 0.0f, glm::vec3( 0.0f, 0.0f, 1.0f ) );//2
 	ModelMatrix = glm::rotate(ModelMatrix, 270.0f, glm::vec3( 1.0f, 0.0f, 0.0f ) );//1
 
 }
